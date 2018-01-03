@@ -39,6 +39,7 @@
             <th>Release Date</th>
             <th>Budget</th>
             <th>Distributor</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,7 @@
             <td>{{ movie.releaseDate }}</td>
             <td>{{ movie.budget }}</td>
             <td>{{ movie.distributor }}</td>
+            <td><button class="btn btn-danger" (click)='deleteMovie(movie.id)'>Delete</button></td>
         </tr>
     </tbody>
 </table>
@@ -92,6 +94,7 @@
             <th>Last Name</th>
             <th>Birth Date</th>
             <th>Active Since Year</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -100,6 +103,9 @@
             <td>{{ actor.lastName }}</td>
             <td>{{ actor.birthDate }}</td>
             <td>{{ actor.activeSinceYear }}</td>
+            <td>
+                <button class="btn btn-danger" (click)='deleteActor(actor.id)'>Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>
