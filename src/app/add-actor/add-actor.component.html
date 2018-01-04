@@ -4,31 +4,31 @@
   <div class="form-group">
     <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputFirstName" name="firstName" ngModel #firstName="ngModel" placeholder="First Name">
+      <input type="text" class="form-control" id="inputFirstName" name="firstName" [ngModel]="updateActor?.firstName" ngModel #firstName="ngModel" placeholder="First Name">
     </div>
   </div>
   <div class="form-group">
     <label for="inputLast Name" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputLastName" name="lastName" ngModel #lastName="ngModel" placeholder="Last Name">
+      <input type="text" class="form-control" id="inputLastName" name="lastName" [ngModel]="updateActor?.lastName" ngModel #lastName="ngModel" placeholder="Last Name">
     </div>
   </div>
   <div class="form-group">
     <label for="inputBirthDate" class="col-sm-2 control-label">Birth Date</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" id="inputBirthDate" name="birthDate" ngModel #birthDate="ngModel" placeholder="Birth Date(mm/dd/yyyy)">
+      <input type="text" class="form-control" id="inputBirthDate" name="birthDate" [ngModel]="updateActor?.birthDate" ngModel #birthDate="ngModel" placeholder="Birth Date(mm/dd/yyyy)">
     </div>
   </div>
   <div class="form-group">
     <label for="inputActiveSinceYear" class="col-sm-2 control-label">Active Since Year</label>
     <div class="col-sm-1">
-      <input type="number" class="form-control" id="inputActiveSinceYear" name="activeSinceYear" ngModel #activeSinceYear="ngModel"
+      <input type="number" class="form-control" id="inputActiveSinceYear" name="activeSinceYear" [ngModel]="updateActor?.activeSinceYear" ngModel #activeSinceYear="ngModel"
         placeholder="Active Since Year">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Add Actor</button>
+      <button type="submit" class="btn btn-primary"><span *ngIf='!updateActor'>Add Actor</span><span *ngIf='updateActor'>Update Actor</span></button>
     </div>
   </div>
 </form>
@@ -41,6 +41,7 @@
         <th>Last Name</th>
         <th>Birth Date</th>
         <th>Active Since Year</th>
+        <th>Update</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -50,6 +51,9 @@
         <td>{{ actor.lastName }}</td>
         <td>{{ actor.birthDate }}</td>
         <td>{{ actor.activeSinceYear }}</td>
+        <td>
+          <button class="btn btn-info" (click)='editActor(actor)'>Update</button>
+        </td>
         <td>
           <button class="btn btn-danger" (click)='deleteActor(actor.id)'>Delete</button>
         </td>

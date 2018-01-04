@@ -4,30 +4,30 @@
   <div class="form-group">
     <label for="inputTitle" class="col-sm-2 control-label">Title</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputTitle" name="title" ngModel #title="ngModel" placeholder="Movie Title">
+      <input type="text" class="form-control" id="inputTitle" name="title" [ngModel]="updateMovie?.title" ngModel #title="ngModel" placeholder="Movie Title">
     </div>
   </div>
   <div class="form-group">
     <label for="inputReleaseDate" class="col-sm-2 control-label">Release Date</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" id="inputReleaseDate" name="releaseDate" ngModel #releaseDate="ngModel" placeholder="Release Date (mm/dd/yyyy)">
+      <input type="text" class="form-control" id="inputReleaseDate" name="releaseDate" [ngModel]="updateMovie?.releaseDate" ngModel #releaseDate="ngModel" placeholder="Release Date (mm/dd/yyyy)">
     </div>
   </div>
   <div class="form-group">
     <label for="inputBudget" class="col-sm-2 control-label">Budget</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="inputBudget" name="budget" ngModel #budget="ngModel" placeholder="Budget">
+      <input type="number" class="form-control" id="inputBudget" name="budget" [ngModel]="updateMovie?.budget" ngModel #budget="ngModel" placeholder="Budget">
     </div>
   </div>
   <div class="form-group">
     <label for="inputDistributor" class="col-sm-2 control-label">Distributor</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputDistributor" name="distributor" ngModel #distributor="ngModel" placeholder="Distributor">
+      <input type="text" class="form-control" id="inputDistributor" name="distributor" [ngModel]="updateMovie?.distributor" ngModel #distributor="ngModel" placeholder="Distributor">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Add Movie</button>
+      <button type="submit" class="btn btn-primary"><span *ngIf='!updateMovie'>Add Movie</span><span *ngIf='updateMovie'>Update Movie</span></button>
     </div>
   </div>
 </form>
@@ -40,6 +40,7 @@
         <th>Release Date</th>
         <th>Budget</th>
         <th>Distributor</th>
+        <th>Update</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -49,6 +50,9 @@
         <td>{{ movie.releaseDate }}</td>
         <td>{{ movie.budget | currency }}</td>
         <td>{{ movie.distributor }}</td>
+        <td>
+          <button class="btn btn-info" (click)='editMovie(movie)'>Update</button>
+        </td>
         <td>
           <button class="btn btn-danger" (click)='deleteMovie(movie.id)'>Delete</button>
         </td>

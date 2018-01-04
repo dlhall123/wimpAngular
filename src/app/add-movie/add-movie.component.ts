@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddMovieComponent implements OnInit {
   private movies;
+  private updateMovie = null;
 
   constructor(private wimpService: WimpService) { }
 
@@ -18,13 +19,26 @@ export class AddMovieComponent implements OnInit {
         this.movies = moviesFromAPI;
       })
   }
+
+  editMovie(movie){
+    this.updateMovie = movie;
+  }
   submitMovie(movieForm: NgForm) {
-    console.log(movieForm.value);
-    this.wimpService.addRecord("movies", movieForm.value)
-      .subscribe(
-      moviesInfo => {
-        this.movies.push(moviesInfo);
-      });
+    if(!this.updateMovie){
+      this.wimpService.addRecord("movies", movieForm.value)
+        .subscribe(
+        moviesInfo => {
+          this.getMovies();
+        });
+    } else {
+      this.wimpService.editRecord("movies", movieForm.value, this.updateMovie.id)
+        .subscribe(
+        actorInfo => {
+          this.getMovies();
+        }
+        )
+      this.updateMovie = null;
+    }
     movieForm.resetForm();
   }
   deleteMovie(movieId) {

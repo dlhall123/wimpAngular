@@ -9,7 +9,14 @@ import { NgForm } from '@angular/forms';
 })
 export class AddActorComponent implements OnInit {
   private actors;
+  private updateActor = null;
   constructor(private wimpService: WimpService) { }
+
+  editActor(actor){
+    this.updateActor = actor;
+    console.log(actor);
+  }
+  
   getActors() {
     this.wimpService.getRecords("actors")
       .subscribe(actorsFromAPI => {
@@ -19,12 +26,22 @@ export class AddActorComponent implements OnInit {
 
 
   submitActor(actorForm: NgForm) {
-    console.log(actorForm.value);
-    this.wimpService.addRecord("actors", actorForm.value)
-      .subscribe(
-      actorInfo => {
-        this.actors.push(actorInfo);
-      });
+    if(!this.updateActor){
+      this.wimpService.addRecord("actors", actorForm.value)
+        .subscribe(
+        actorInfo => {
+          this.getActors();
+        });
+    }
+    else{
+      this.wimpService.editRecord("actors", actorForm.value, this.updateActor.id)
+        .subscribe(
+          actorInfo => {
+            this.getActors();
+          }
+        )
+      this.updateActor = null;
+    }
     actorForm.resetForm();
   }
 

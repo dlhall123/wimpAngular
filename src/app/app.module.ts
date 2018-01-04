@@ -8,6 +8,7 @@ import { WimpService } from './wimp.service';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { AddActorComponent } from './add-actor/add-actor.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AppRoutingModule } from './app-routing.module'
 
 
 
@@ -21,7 +22,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [WimpService],
   bootstrap: [AppComponent]
